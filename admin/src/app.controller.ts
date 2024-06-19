@@ -11,20 +11,21 @@ export class AppController {
 
   @Get()
   async getHello() {
-    //? emit -> message pattern
-    this.client.emit('hello', 'Hello from RabbitMQ!');
-
-    //! send -> event pattern
-    // return const data =  this.client.send('hello', 'Hello from RabbitMQ!');
-    // const data = this.client
-    //   .send('hello', {
-    //     data: 'Hello from RabbitMQ',
-    //   })
+    //? emit -> message pattern (not return data)
+    // return this.client.emit({ cmd: 'hello' }, 'Hello from RabbitMQ!');
+    //! send -> event pattern (return data)
+    // const data = await this.client
+    //   .send(
+    //     { cmd: 'hello' },
+    //     {
+    //       data: 'Hello from RabbitMQ',
+    //     },
+    //   )
     //   .toPromise();
-    // const rs = await data;
-    // return rs;
+    // return data;
+    return this.client.send({ cmd: 'hello' }, 'Hello from RabbitMQ!');
     // this.client
-    //   .send('hello', { data: 'Hello from RabbitMQ' })
+    //   .send({ cmd: 'hello' }, { data: 'Hello from RabbitMQ' })
     //   .subscribe((response) => {
     //     console.log(response);
     //   });

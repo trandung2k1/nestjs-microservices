@@ -11,14 +11,15 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @EventPattern('hello')
-  async hello(@Payload() data: any) {
+  @EventPattern({ cmd: 'hello' })
+  async hello(data: any) {
     console.log(data);
     return data;
   }
 
-  @MessagePattern('hello')
-  async get(@Payload() data: any) {
+  @MessagePattern({ cmd: 'hello' })
+  async get(data: any) {
     console.log(data);
+    return data;
   }
 }
